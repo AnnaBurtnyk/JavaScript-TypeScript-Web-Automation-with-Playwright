@@ -1,0 +1,35 @@
+<body>
+    <section>
+        <h2 class="header">Header</h2>
+        <p id='data'>DOM - document object model</p>
+        <span>Span</span>
+        <div>Invisible element</div>
+    </section>
+    <button id="btn">Add style</button>
+
+    <script>
+        function addStyle() {
+            // 1) Змінюємо стиль h2
+            document.querySelector(".header").style.color = "red";
+            document.querySelector(".header").style.textDecoration = "underline";
+
+            // 2) Змінюємо стиль p
+            let paragraph = document.getElementById("data");
+            paragraph.style.color = "brown";
+            paragraph.style.fontSize = "18px";
+            paragraph.style.fontFamily = "Comic Sans MS";
+
+            // 3) Змінюємо стиль span
+            let spanElement = document.querySelector("span");
+            spanElement.style.color = "green";
+            spanElement.style.fontStyle = "italic";
+
+            // 4) Ховаємо div
+            let divElement = document.querySelector("div");
+            divElement.style.display = "none";
+        }
+
+        // Додаємо обробник події на кнопку
+        document.getElementById("btn").addEventListener("click", addStyle);
+    </script>
+</body>
