@@ -55,18 +55,17 @@ console.log(deleteItem([3, 12, 16, 19, 21, 33], 3)); // [12, 16, 19, 21, 33]
 // getCircleLength(“five”); // “Incorrect radius - please, enter a positive numeric value!”
 
 function getCircleLength(r) {
-    if (isNaN(r)) { //чи r число
-        return "Incorrect radius - please, enter a positive numeric value!";
+    if (isNaN(r) || r <= 0) {
+       throw new Error ("Incorrect radius - please, enter a positive numeric value!");
     }
-    if (r <= 0) {
-        return "Incorrect radius - please, enter a positive numeric value!";
-    }
-    return (2 * 3.14 * r).toFixed(1);; // Формула довжини кола + довелось додати toFixed, бо повертає багато знаків після коми
-}
+    return (2 * 3.14 * r).toFixed(-1);; // Формула довжини кола + довелось додати toFixed, бо повертає багато знаків після коми
+};  
 
-// Приклад використання функції
-console.log(getCircleLength("five"));  //Incorrect radius - please, enter a positive numeric value!
-console.log(getCircleLength(5));  
+try { 
+console.log(getCircleLength(5));  //Incorrect radius - please, enter a positive numeric value!
+} catch (error) {
+console.error(error.message);
+}  
 
 
 // +Task 5. Реалізуйте функцію checkID(), яка пропонуватиме користувачу ввести власне ID. Валідні ID знаходяться в діапазоні від 1 до 1000.
@@ -76,32 +75,26 @@ console.log(getCircleLength(5));
 // - ID знаходиться поза межами коректного діапазону.
 // Якщо ID валідне юзер отримує відповідне сповіщення.
 // В блокові catch передбачити виведення назви і опису помилки.
-
 function checkID() {
-    let Id = prompt("Please enter your ID:");
+    try {
+    const Id = prompt("Please enter your ID:");
 
-    if (Id === "") {    
-        alert("The field is empty! Please enter your ID.");
-        return;
+    if (Id.trim() === "") {    
+        throw new Error("The field is empty! Please enter your ID.");
     }
 
-    Id = Number(Id); //Чи введено числове значення
     if (isNaN(Id)) {
-        alert("Field value is not a number! Please enter a valid numeric ID.");
-        return;
+        throw new Error("Field value is not a number! Please enter a valid numeric ID.");
     }
 
-    if (Id < 1) {
-        alert("Please enter a value greater than or equal 1.");
-        return;
-    }
-
-    if (Id > 1000) {
-        alert("Please enter a value less than or equal 1000.");
-        return;
+    if (Id < 1 || Id > 1000) {
+        throw new Error("Please enter a value between 1 and 1000.");
     }
 
     alert("Your ID is valid!");
+} catch (error) {
+alert(`Error: ${error.name}\nDescription: ${error.message}`);
+ } 
 }
 
 checkID();
