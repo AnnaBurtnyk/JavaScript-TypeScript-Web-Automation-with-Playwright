@@ -13,20 +13,20 @@ name="email">
 <input type="submit" class="btn">
 </fieldset>
 
-
-document.querySelector('input[type="submit"]').addEventListener('click', function(event) {
-    event.preventDefault(); // Щоб форма не відправлялася при натисканні кнопки
-
-    let name = document.querySelector('input[name="fio"]').value;
-    let phoneNumber = document.querySelector('input[name="phone"]').value;
-    let dateOfBirth = document.querySelector('input[name="birthday"]').value;
-    let emailAddress = document.querySelector('input[name="email"]').value;
-
-    console.log("Name:", name);
-    console.log("Phone Number:", phoneNumber);
-    console.log("Date of Birth:", dateOfBirth);
-    console.log("Email Address:", emailAddress);
-});
+    
+    <script>
+    document.querySelector('input[type="submit"]').addEventListener('click', function(event) {
+    
+        const name = document.querySelector('input[name="fio"]').value;
+        const phoneNumber = document.querySelector('input[name="phone"]').value;
+        const dateOfBirth = document.querySelector('input[name="birthday"]').value;
+        const emailAddress = document.querySelector('input[name="email"]').value;
+    
+        console.log("Name:", name);
+        console.log("Phone Number:", phoneNumber);
+        console.log("Date of Birth:", dateOfBirth);
+        console.log("Email Address:", emailAddress);
+    });
 
 
 
@@ -49,6 +49,38 @@ HTML:
  */}
 
 
+<body>
+    <section>
+        <h2 class="header">Header</h2>
+        <p id="data">DOM - document object model</p>
+        <span>Span</span>
+        <div>Invisible element</div>
+    </section>
+    <button id="btn">Add style</button>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function() {
+            // Стиль для <h2>
+            document.querySelector("h2").style.color = "red";
+            document.querySelector("h2").style.textDecoration = "underline";
+
+            // Стиль для <p>
+            document.getElementById("data").style.color = "brown";
+            document.getElementById("data").style.fontSize = "18px";
+            document.getElementById("data").style.fontFamily = "'Comic Sans MS'";
+
+            // Стиль для <span>
+            document.querySelector("span").style.color = "green";
+            document.querySelector("span").style.fontStyle = "italic";
+
+            // Сховати <div>
+            document.querySelector("div").style.display = "none";
+        });
+    </script>
+</body>
+
+
+
 Task 3. Реалізуйте програму, яка по натисканню на кнопку виводитиме повідомлення
 "I was pressed!", при наведенні на кнопку виводитиме повідомлення "Mouse on me!", а при відведенні курсора миші виводитиме повідомлення "Mouse is not on me!".
 
@@ -62,21 +94,24 @@ Task 3. Реалізуйте програму, яка по натисканню 
 <body>
 
 
-<button id="myButton">Press</button>
+<button id="myButton">Live Button!</button>
+<div id="message"></div> <!-- Місце для виведення повідомлень -->
+
 
 <script>
-    const button = document.getElementById('myButton');   //Знайти кнопку за її id
+    const button = document.getElementById('myButton');   //Знаходить кнопку за її id
+    const messageDiv = document.getElementById('message');  //елемент для виведення повідомлень
 
     button.addEventListener('click', function() {     
-        console.log("I was pressed!");
+        messageDiv.textContent = "I was pressed!";
     });
 
     button.addEventListener('mouseenter', function() {
-        console.log("Mouse on me!");
+        messageDiv.textContent = "Mouse on me!";
     });
 
     button.addEventListener('mouseleave', function() {
-        console.log("Mouse is not on me!");
+        messageDiv.textContent = "Mouse is not on me!";
     });
 </script>
 
@@ -98,38 +133,42 @@ Task 4. Напишіть скріпт, який за допомогою засо
 
 
 <!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Creation</title>
-</head>
+<html lang="en">
 <body>
 
 <script>
-    let article = document.createElement('article');    // Створює елементи
-    article.className = 'article postList'; // Додає класи
-
-    let div = document.createElement('div');
-    div.id = 'container'; // додаємо id
-
-    let post1 = document.createElement('p');     // Створює абзаци
-    post1.textContent = 'Post 1';
-
-    let post2 = document.createElement('p');
-    post2.textContent = 'Post 2';
-
-    let post3 = document.createElement('p');
-    post3.textContent = 'Post 3';
-
-    div.appendChild(post1);
-    div.appendChild(post2);
-    div.appendChild(post3);
-
-    article.appendChild(div);     // Додає div в article
-
-    document.body.appendChild(article);     // Додає article в body
+    document.body.innerHTML = `
+    <article class="article postList">
+        <div id="container">
+            <p>Post 1</p>
+            <p>Post 2</p>
+            <p>Post 3</p>
+        </div>
+    </article>`;
 </script>
 
 </body>
 </html>
+
+
+Task 5*. Відповідно до заданого мокапу написати простий веб-застосунок (HTML+JS), який дає змогу користувачу ввести дані в поле вводу і по натисканню на кнопку Send опублікувати ці дані на сторінку в DOM із вказанням дати написання. Після успішної публікації - очистити поле вводу без перезавантаження сторінки.
+
+<body>
+    <div id="messageContainer"></div>
+    <input type="text" id="inputField" placeholder="Write message" />
+    <button id="sendButton">Send</button>
+
+    <script>
+        document.getElementById("sendButton").addEventListener("click", function() {
+            const messageText = document.getElementById("inputField").value.trim();
+            if (messageText) {
+                const date = new Date();
+                const formattedDate = `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}, ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                const messageElement = document.createElement("div");
+                messageElement.innerHTML = `<p>${messageText}</p><p>${formattedDate}</p>`;
+                document.getElementById("messageContainer").appendChild(messageElement);
+                document.getElementById("inputField").value = "";
+            }
+        });
+    </script>
+</body>
