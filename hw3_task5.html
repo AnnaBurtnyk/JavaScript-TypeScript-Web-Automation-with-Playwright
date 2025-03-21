@@ -1,0 +1,19 @@
+<body>
+    <div id="messageContainer"></div>
+    <input type="text" id="inputField" placeholder="Write message" />
+    <button id="sendButton">Send</button>
+
+    <script>
+        document.getElementById("sendButton").addEventListener("click", function() {
+            const messageText = document.getElementById("inputField").value.trim();
+            if (messageText) {
+                const date = new Date();
+                const formattedDate = `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}, ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                const messageElement = document.createElement("div");
+                messageElement.innerHTML = `<p>${messageText}</p><p>${formattedDate}</p>`;
+                document.getElementById("messageContainer").appendChild(messageElement);
+                document.getElementById("inputField").value = "";
+            }
+        });
+    </script>
+</body>
