@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Events</title>
+</head>
+<body>
+
+
+    <button id="myButton">Live Button!</button>
+    <div id="message"></div> <!-- Місце для виведення повідомлень -->
+
+
+<script>
+    const button = document.getElementById('myButton');   //Знаходить кнопку за її id
+    const messageDiv = document.getElementById('message');  //елемент для виведення повідомлень
+
+    button.addEventListener('click', function() {     
+        messageDiv.textContent = "I was pressed!";
+    });
+
+    button.addEventListener('mouseenter', function() {
+        messageDiv.textContent = "Mouse on me!";
+    });
+
+    button.addEventListener('mouseleave', function() {
+        messageDiv.textContent = "Mouse is not on me!";
+    });
+</script>
+
+</body>
+</html>
