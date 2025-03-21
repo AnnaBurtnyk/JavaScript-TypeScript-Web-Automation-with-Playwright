@@ -1,0 +1,29 @@
+<body>
+    <section>
+        <h2 class="header">Header</h2>
+        <p id="data">DOM - document object model</p>
+        <span>Span</span>
+        <div>Invisible element</div>
+    </section>
+    <button id="btn">Add style</button>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function() {
+            // Стиль для <h2>
+            document.querySelector("h2").style.color = "red";
+            document.querySelector("h2").style.textDecoration = "underline";
+
+            // Стиль для <p>
+            document.getElementById("data").style.color = "brown";
+            document.getElementById("data").style.fontSize = "18px";
+            document.getElementById("data").style.fontFamily = "'Comic Sans MS'";
+
+            // Стиль для <span>
+            document.querySelector("span").style.color = "green";
+            document.querySelector("span").style.fontStyle = "italic";
+
+            // Сховати <div>
+            document.querySelector("div").style.display = "none";
+        });
+    </script>
+</body>
