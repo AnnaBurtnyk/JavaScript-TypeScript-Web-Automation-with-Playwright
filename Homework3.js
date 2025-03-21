@@ -87,8 +87,6 @@ Task 3. Реалізуйте програму, яка по натисканню 
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Events</title>
 </head>
 <body>
