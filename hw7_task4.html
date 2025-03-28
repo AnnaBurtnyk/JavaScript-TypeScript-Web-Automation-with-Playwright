@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <title>Get User Emails</title>
+</head>
+<body>
+    <h1>Email list</h1>
+    <button id="getEmailsButton">Email list</button>
+    <ul id="emailsList"></ul>
+    <p id="errorMessage" style="color: red;"></p>
+
+    <script>
+        document.getElementById("getEmailsButton").onclick = function() {
+            // Очищаємо старі дані
+            document.getElementById("emailsList").innerHTML = "";
+            document.getElementById("errorMessage").innerHTML = "";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://fakestoreapi.com/users", true);
+
+            xhr.onload = function() {
+                if (xhr.status == 200) { 
+                    var users = JSON.parse(xhr.responseText);
+                    if (users.length > 0) {
+                        for (var i = 0; i < users.length; i++) {
+                            var li = document.createElement("li");
+                            li.textContent = users[i].email;
+                            document.getElementById("emailsList").appendChild(li);
+                        }
+                    } else {
+                        document.getElementById("errorMessage").textContent = "No users found.";
+                    }
+                } else {
+                    document.getElementById("errorMessage").textContent = "Error: " + xhr.status;
+                }
+            };
+
+            xhr.onerror = function() {
+                document.getElementById("errorMessage").textContent = "Error happened. Please try again.";
+            };
+
+            xhr.send();
+        };
+    </script>
+</body>
+</html>
